@@ -51,25 +51,26 @@ class StockTicker:
         self.initial_price = (si.get_live_price(self.stock_name))
 
 # How often you want to update prices (currently in seconds)
-update_time = 60
+update_time = 5
 
 # Create objects for each stock you want to track ("Ticker Symbol", Moon Price)
 gme = StockTicker("GME", 1000)
 amc = StockTicker("AMC", 40)
 
+# Add stock objects here
+stonks = [gme, amc]
+
 # Grab price at launch of app for a reference point
-gme.InitialPrice()
-amc.InitialPrice()
+for stonk in stonks:
+    stonk.InitialPrice()
 
 # Just an intro message
 print(f"Fueling up the rocket, please be patient...will take about {update_time} seconds...")
 
 # Check live price and alert to swings
-schedule.every(update_time).seconds.do(gme.ShowLivePrices)
-schedule.every(update_time).seconds.do(gme.Alerts)
-
-schedule.every(update_time).seconds.do(amc.ShowLivePrices)
-schedule.every(update_time).seconds.do(amc.Alerts)
+for stonk in stonks:
+    schedule.every(update_time).seconds.do(stonk.ShowLivePrices)
+    schedule.every(update_time).seconds.do(stonk.Alerts)
 
 # Used for timer
 while True:
