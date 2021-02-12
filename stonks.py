@@ -9,7 +9,7 @@ from datetime import datetime
 from termcolor import colored
 
 class StockTicker:
-    def __init__(self, stock_name, moon_price): 
+    def __init__(self, stock_name, moon_price=None): 
         self.stock_name = stock_name
         self.initial_price = 0
         self.current_price = 0
@@ -37,15 +37,16 @@ class StockTicker:
     
     def Alerts(self): 
         # Alerts for target prices, a.k.a. Moon Price
-        if self.current_price > self.moon_price:
-            print(colored("--------------------------", "green"))
-            print(colored(f"Pay attention to {self.stock_name}! It's going to the moon!", "green"))
-            print(colored("--------------------------", "green"))
+        if self.moon_price:
+            if self.current_price > self.moon_price:
+                print(colored("--------------------------", "green"))
+                print(colored(f"Pay attention to {self.stock_name}! It's going to the moon!", "green"))
+                print(colored("--------------------------", "green"))
 
-        if self.current_price > (self.moon_price * .5):
-            print(colored("--------------------------", "yellow"))
-            print(colored(f"{self.stock_name} is half way to the moon!", "yellow"))
-            print(colored("--------------------------", "yellow"))
+            if self.current_price > (self.moon_price * .5):
+                print(colored("--------------------------", "yellow"))
+                print(colored(f"{self.stock_name} is half way to the moon!", "yellow"))
+                print(colored("--------------------------", "yellow"))
 
     def InitialPrice(self):
         self.initial_price = (si.get_live_price(self.stock_name))
