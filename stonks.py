@@ -52,7 +52,7 @@ class StockTicker:
         self.initial_price = (si.get_live_price(self.stock_name))
 
 # How often you want to update prices (currently in seconds)
-update_time = 5
+update_time = 600
 
 # Create objects for each stock you want to track ("Ticker Symbol", Moon Price)
 gme = StockTicker("GME", 1000)
